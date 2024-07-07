@@ -1,0 +1,28 @@
+default:
+  listenAddr: ":6180"
+  webSocketListenAddr: ""
+  JWTSecret: "kubemanage"
+  expireTime: 10
+
+cmdb:
+  hostCheck:
+    hostCheckEnable: true # 是否启用主机检测时间
+    hostCheckDuration: 10  # 主机检测周期 单位分钟
+    hostCheckTimeout: 3 # 检测超时时间 单位秒
+
+mysql:
+  host: "127.0.0.1"
+  port: "3306"
+  user: "root"
+  password: "Zhaohaihang1!"
+  name: "kubemanage"
+  maxOpenConns: 100
+  maxLifetime: 20
+  maxIdleConns: 10
+
+log:
+  level: "debug"   ## 日志等级
+  filename: "kubemanage.log"  # 日志文件位置
+  max_size: 200    # 日志文件最大大小(MB)
+  max_age: 30      # 保留旧日志文件的最大天数
+  max_backups: 7   # 最大保留日志个数
