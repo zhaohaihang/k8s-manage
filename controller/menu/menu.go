@@ -15,7 +15,7 @@ import (
 // @Summary   获取用户动态路由
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Param     data  body      dto.Empty                                                  true  "空"
+// @Param     data  body      dto.Empty     true  "空"
 // @Success   200   {object}  middleware.Response{data=dto.SysBaseMenusResponse,msg=string}  "获取用户动态路由,返回包括系统菜单详情列表"
 // @Router    /api/menu/:authID/getMenuByAuthID [get]
 func (m *menuController) GetMenusByAuthID(ctx *gin.Context) {
@@ -81,7 +81,7 @@ func (m *menuController) AddBaseMenu(ctx *gin.Context) {
 // @accept    application/json
 // @Produce   application/json
 // @Param     data  body      dto.AddMenuAuthorityInput  true  "角色ID"
-// @Success   200   {object}  response.Response{msg=string}   "增加menu和角色关联关系"
+// @Success   200   {object}  middleware.Response{msg=string}   "增加menu和角色关联关系"
 // @Router    /api/menu/add_menu_authority [post]
 func (m *menuController) AddMenuAuthority(ctx *gin.Context) {
 	params := &dto.AddMenuAuthorityInput{}

@@ -21,7 +21,7 @@ type ingressController struct{}
 // @ID           /api/k8s/ingress/create
 // @Accept       json
 // @Produce      json
-// @Param        body  body  kubernetes.IngressCreteInput  true  "body"
+// @Param        body  body  kubeDto.IngressCreteInput  true  "body"
 // @Success       200  {object}  middleware.Response"{"code": 200, msg="","data": "新增成功}"
 // @Router       /api/k8s/ingress/create [post]
 func (i *ingressController) CreateIngress(ctx *gin.Context) {

@@ -9,9 +9,9 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "/data/project/kubemanage/cmd/main.go",
+            "program": "/data/project/k8s-manage/cmd/main.go",
             "env": {},
-            "args": ["--configFile","/data/project/kubemanage/config.yaml"],
+            "args": ["--configFile","/data/project/k8s-manage/config.yaml"],
             "dlvFlags": ["--check-go-version=false"]
         }
     ]

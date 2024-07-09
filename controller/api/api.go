@@ -14,7 +14,7 @@ import (
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body     dto.Empty
+// @Param     data  body     dto.Empty    true  "空"
 // @Success   200   {object}  middleware.Response{data=[]model.SysApi,msg=string}  "获取API列表"
 // @Router    /api/sysApi/getAPiList [get]
 func (a *apiController) GetApiList(ctx *gin.Context) {

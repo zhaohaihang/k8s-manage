@@ -41,7 +41,7 @@ func (o *operationController) GetOperationRecordList(ctx *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body     dto.Empty
+// @Param     data  body     dto.Empty  true  "空"
 // @Success   200   {object}  middleware.Response{msg=string}  "删除SysOperationRecord"
 // @Router    /api/operation/{id}/delete_operation [delete]
 func (o *operationController) DeleteOperationRecord(ctx *gin.Context) {
@@ -63,7 +63,7 @@ func (o *operationController) DeleteOperationRecord(ctx *gin.Context) {
 // @Security  ApiKeyAuth
 // @accept    application/json
 // @Produce   application/json
-// @Param     data  body     dto.IdsReq
+// @Param     data  body     dto.IdsReq   true "id值"
 // @Success   200   {object}  middleware.Response{msg=string}  "删除SysOperationRecord"
 // @Router    /api/operation/delete_operations [delete]
 func (o *operationController) DeleteOperationRecords(ctx *gin.Context) {
