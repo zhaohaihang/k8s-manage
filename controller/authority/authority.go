@@ -10,6 +10,29 @@ import (
 	"github.com/zhaohaihang/k8s-manage/pkg/utils"
 )
 
+// CreateAuthority
+// @Tags      Authority
+// @Summary   创建角色
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Param     data  body      dto.AuthorityCreateUpdateInput 	true 	"空"
+// @Success   200   {object}  middleware.Response{msg=string}  "创建角色"
+// @Router    /api/authority/createAuthority [post]
+func (a *authorityController) CreateAuthority(ctx *gin.Context) {
+	params := &dto.AuthorityCreateUpdateInput{}
+	if err := params.BindingValidParams(ctx); err != nil {
+		v1.Log.ErrorWithCode(globalError.ParamBindError, err)
+		middleware.ResponseError(ctx, globalError.NewGlobalError(globalError.ParamBindError, err))
+		return
+	}
+	if err := v1.CoreV1.System().Authority().CreateAuthority(ctx, params.AuthorityId, params.AuthorityName); err != nil {
+		v1.Log.ErrorWithCode(globalError.CreateError, err)
+		middleware.ResponseError(ctx, globalError.NewGlobalError(globalError.CreateError, err))
+		return
+	}
+	middleware.ResponseSuccess(ctx, "创建成功")
+}
+
 // GetAuthorityList
 // @Tags      Authority
 // @Summary   获取角色
@@ -32,29 +55,6 @@ func (a *authorityController) GetAuthorityList(ctx *gin.Context) {
 		return
 	}
 	middleware.ResponseSuccess(ctx, data)
-}
-
-// CreateAuthority
-// @Tags      Authority
-// @Summary   创建角色
-// @Security  ApiKeyAuth
-// @Produce   application/json
-// @Param     data  body      dto.AuthorityCreateUpdateInput                                  true  "空"
-// @Success   200   {object}  middleware.Response{msg=string}  "创建角色"
-// @Router    /api/authority/createAuthority [post]
-func (a *authorityController) CreateAuthority(ctx *gin.Context) {
-	params := &dto.AuthorityCreateUpdateInput{}
-	if err := params.BindingValidParams(ctx); err != nil {
-		v1.Log.ErrorWithCode(globalError.ParamBindError, err)
-		middleware.ResponseError(ctx, globalError.NewGlobalError(globalError.ParamBindError, err))
-		return
-	}
-	if err := v1.CoreV1.System().Authority().CreateAuthority(ctx, params.AuthorityId, params.AuthorityName); err != nil {
-		v1.Log.ErrorWithCode(globalError.CreateError, err)
-		middleware.ResponseError(ctx, globalError.NewGlobalError(globalError.CreateError, err))
-		return
-	}
-	middleware.ResponseSuccess(ctx, "创建成功")
 }
 
 // UpdateAuthority
