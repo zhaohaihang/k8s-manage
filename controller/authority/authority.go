@@ -38,7 +38,7 @@ func (a *authorityController) CreateAuthority(ctx *gin.Context) {
 // @Summary   获取角色
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Param     data  body      dto.PageInfo                                            true  "空"
+// @Param     data  body      dto.PageInfo  true  "分页信息"
 // @Success   200   {object}  middleware.Response{data=dto.AuthorityList,msg=string}  "获取角色列表"
 // @Router    /api/authority/getAuthorityList [get]
 func (a *authorityController) GetAuthorityList(ctx *gin.Context) {
