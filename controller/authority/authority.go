@@ -15,7 +15,7 @@ import (
 // @Summary   创建角色
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Param     data  body      dto.AuthorityCreateUpdateInput 	true 	"空"
+// @Param     data  body      dto.AuthorityCreateUpdateInput 	true 	"角色信息"
 // @Success   200   {object}  middleware.Response{msg=string}  "创建角色"
 // @Router    /api/authority/createAuthority [post]
 func (a *authorityController) CreateAuthority(ctx *gin.Context) {
@@ -62,7 +62,7 @@ func (a *authorityController) GetAuthorityList(ctx *gin.Context) {
 // @Summary   更新角色
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Param     data  body      dto.AuthorityCreateUpdateInput                                            true  "空"
+// @Param     data  body      dto.AuthorityCreateUpdateInput    true  "角色信息"
 // @Success   200   {object}  middleware.Response{msg=string}  "更新角色"
 // @Router    /api/authority/updateAuthority [put]
 func (a *authorityController) UpdateAuthority(ctx *gin.Context) {
@@ -85,7 +85,7 @@ func (a *authorityController) UpdateAuthority(ctx *gin.Context) {
 // @Summary   删除角色
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Param     data  body      dto.Empty                                            true  "空"
+// @Param     data  body      dto.Empty    true  "空"
 // @Success   200   {object}  middleware.Response{msg=string}  "删除角色"
 // @Router    /api/authority/:authID/delAuthority [delete]
 func (a *authorityController) DeleteAuthority(ctx *gin.Context) {
