@@ -264,7 +264,6 @@ func (h *hostService) GetHostListWithGroupName(ctx context.Context, uuid uuid.UU
 }
 
 func (h *hostService) WebShell(ctx *gin.Context, instanceID string, cols, rows int) error {
-	// TODO 需要优化
 	//获取主机信息
 	host, err := h.factory.CMDB().Host().Find(ctx, model.CMDBHost{InstanceID: instanceID})
 	if err != nil {

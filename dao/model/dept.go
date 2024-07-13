@@ -51,7 +51,6 @@ func (d *Department) InitData(ctx context.Context, db *gorm.DB) error {
 
 func (d *Department) IsInitData(ctx context.Context, db *gorm.DB) (bool, error) {
 	var out *Department
-	// TODO 验证方式统一优化
 	if err := db.WithContext(ctx).Where("dept_name = 'Kubemanage' ").Find(&out).Error; err != nil {
 		return false, nil
 	}

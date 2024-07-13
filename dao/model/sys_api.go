@@ -32,7 +32,6 @@ func (a *SysApi) InitData(ctx context.Context, db *gorm.DB) error {
 
 func (a *SysApi) IsInitData(ctx context.Context, db *gorm.DB) (bool, error) {
 	var out *SysApi
-	// TODO 验证方式统一优化
 	if err := db.WithContext(ctx).Where("path = '/api/user/login' ").Find(&out).Error; err != nil {
 		return false, nil
 	}
