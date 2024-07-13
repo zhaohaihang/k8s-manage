@@ -9,14 +9,11 @@ func init() {
 	RegisterInitializer(DepartmentOrder, &Department{})
 }
 
-// TODO 是否删除多余字段
-
 type Department struct {
 	DeptId   uint         `json:"deptId" gorm:"primaryKey;autoIncrement;"` //部门编码
 	ParentId string       `json:"parentId" gorm:"size:10"`                 //上级部门
 	DeptName string       `json:"deptName"  gorm:"size:128;"`              //部门名称
 	Sort     int          `json:"sort" gorm:"size:4;"`                     //排序
-	Leader   string       `json:"leader" gorm:"size:128;"`                 //负责人
 	Status   int          `json:"status" gorm:"size:4;"`                   //状态
 	Children []Department `json:"children" gorm:"-"`
 	SysUsers []SysUser    `json:"users"`

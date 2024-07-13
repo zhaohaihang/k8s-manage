@@ -133,18 +133,6 @@ func (u *userController) SetUserAuthority(ctx *gin.Context) {
 		middleware.ResponseError(ctx, globalError.NewGlobalError(globalError.ParamBindError, err))
 		return
 	}
-	// token中存在角色信息，需要生成新的token
-	// TODO 是否考虑生成新token
-	//claims := utils.GetUserInfo(ctx)
-	//claims.AuthorityId = params.Authorities[0]
-	//newToken, err := pkg.JWTToken.GenerateToken(claims.BaseClaims)
-	//if err != nil {
-	//	v1.Log.ErrorWithCode(globalError.ParamBindError, err)
-	//	middleware.ResponseError(ctx, globalError.NewGlobalError(globalError.ParamBindError, err))
-	//	return
-	//}
-	//ctx.Header("new-token", newToken)
-	//ctx.Header("new-expires-at", strconv.FormatInt(claims.ExpiresAt, 10))
 	middleware.ResponseSuccess(ctx, "操作成功")
 }
 
