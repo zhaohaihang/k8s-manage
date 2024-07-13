@@ -8,7 +8,6 @@ import (
 	"github.com/zhaohaihang/k8s-manage/pkg/globalError"
 )
 
-// GetApiList
 // @Tags      API
 // @Summary   获取API列表
 // @Security  ApiKeyAuth

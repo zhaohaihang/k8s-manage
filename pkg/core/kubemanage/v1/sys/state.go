@@ -38,11 +38,6 @@ func InitServer() (*dto.Server, error) {
 	return server, nil
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: InitCPU
-//@description: OS信息
-//@return: o Os, err error
-
 func InitOS() (o dto.Os) {
 	o.GOOS = runtime.GOOS
 	o.NumCPU = runtime.NumCPU()
@@ -51,11 +46,6 @@ func InitOS() (o dto.Os) {
 	o.NumGoroutine = runtime.NumGoroutine()
 	return o
 }
-
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: InitCPU
-//@description: CPU信息
-//@return: c Cpu, err error
 
 func InitCPU() (c dto.Cpu, err error) {
 	if cores, err := cpu.Counts(false); err != nil {
@@ -71,11 +61,6 @@ func InitCPU() (c dto.Cpu, err error) {
 	return c, nil
 }
 
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: InitRAM
-//@description: RAM信息
-//@return: r Ram, err error
-
 func InitRAM() (r dto.Ram, err error) {
 	if u, err := mem.VirtualMemory(); err != nil {
 		return r, err
@@ -86,11 +71,6 @@ func InitRAM() (r dto.Ram, err error) {
 	}
 	return r, nil
 }
-
-//@author: [SliverHorn](https://github.com/SliverHorn)
-//@function: InitDisk
-//@description: 硬盘信息
-//@return: d Disk, err error
 
 func InitDisk() (d dto.Disk, err error) {
 	if u, err := disk.Usage("/"); err != nil {

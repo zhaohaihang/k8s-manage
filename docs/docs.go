@@ -23,6 +23,7 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
+                "description": "删除角色",
                 "produces": [
                     "application/json"
                 ],
@@ -30,6 +31,7 @@ const docTemplate = `{
                     "Authority"
                 ],
                 "summary": "删除角色",
+                "operationId": "/api/authority/:authID/delAuthority",
                 "parameters": [
                     {
                         "description": "空",
@@ -70,6 +72,10 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
+                "description": "创建角色",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -77,6 +83,7 @@ const docTemplate = `{
                     "Authority"
                 ],
                 "summary": "创建角色",
+                "operationId": "/api/authority/createAuthority",
                 "parameters": [
                     {
                         "description": "角色信息",
@@ -117,13 +124,18 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
+                "description": "获取角色列表",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "Authority"
                 ],
-                "summary": "获取角色",
+                "summary": "获取角色列表",
+                "operationId": "/api/authority/getAuthorityList",
                 "parameters": [
                     {
                         "description": "分页信息",
@@ -220,6 +232,10 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
+                "description": "更新角色",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -227,6 +243,7 @@ const docTemplate = `{
                     "Authority"
                 ],
                 "summary": "更新角色",
+                "operationId": "/api/authority/updateAuthority",
                 "parameters": [
                     {
                         "description": "角色信息",

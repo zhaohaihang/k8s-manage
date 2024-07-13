@@ -59,7 +59,7 @@ func (p *permissionService) CheckPermissionWithDB(ctx context.Context, uuid uuid
 	return ok, nil
 }
 
-// CheckPermissionWithCache 检查主机是否有权限 返回false没有权限
+// CheckPermissionWithCache 检查用户是否有主机的权限 返回false没有权限
 func (p *permissionService) CheckPermissionWithCache(ctx context.Context, uuid uuid.UUID, instanceID string) (bool, error) {
 	return p.CheckPermission(ctx, uuid, instanceID)
 }

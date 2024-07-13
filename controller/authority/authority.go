@@ -10,12 +10,14 @@ import (
 	"github.com/zhaohaihang/k8s-manage/pkg/utils"
 )
 
-// CreateAuthority
+// @Description  创建角色
+// @ID        /api/authority/createAuthority
 // @Tags      Authority
 // @Summary   创建角色
-// @Security  ApiKeyAuth
+// @Accept    application/json
 // @Produce   application/json
 // @Param     data  body      dto.AuthorityCreateUpdateInput 	true 	"角色信息"
+// @Security  ApiKeyAuth
 // @Success   200   {object}  middleware.Response{msg=string}  "创建角色"
 // @Router    /api/authority/createAuthority [post]
 func (a *authorityController) CreateAuthority(ctx *gin.Context) {
@@ -33,12 +35,14 @@ func (a *authorityController) CreateAuthority(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, "创建成功")
 }
 
-// GetAuthorityList
+// @Description  获取角色列表
+// @ID        /api/authority/getAuthorityList
 // @Tags      Authority
-// @Summary   获取角色
-// @Security  ApiKeyAuth
+// @Summary   获取角色列表
+// @Accept    application/json
 // @Produce   application/json
 // @Param     data  body      dto.PageInfo  true  "分页信息"
+// @Security  ApiKeyAuth
 // @Success   200   {object}  middleware.Response{data=dto.AuthorityList,msg=string}  "获取角色列表"
 // @Router    /api/authority/getAuthorityList [get]
 func (a *authorityController) GetAuthorityList(ctx *gin.Context) {
@@ -57,12 +61,14 @@ func (a *authorityController) GetAuthorityList(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, data)
 }
 
-// UpdateAuthority
+// @Description  更新角色
+// @ID	      /api/authority/updateAuthority
 // @Tags      Authority
 // @Summary   更新角色
-// @Security  ApiKeyAuth
+// @Accept    application/json
 // @Produce   application/json
 // @Param     data  body      dto.AuthorityCreateUpdateInput    true  "角色信息"
+// @Security  ApiKeyAuth
 // @Success   200   {object}  middleware.Response{msg=string}  "更新角色"
 // @Router    /api/authority/updateAuthority [put]
 func (a *authorityController) UpdateAuthority(ctx *gin.Context) {
@@ -80,12 +86,13 @@ func (a *authorityController) UpdateAuthority(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, "修改成功")
 }
 
-// DeleteAuthority
+// @Description  删除角色
+// @ID		/api/authority/:authID/delAuthority  
 // @Tags      Authority
 // @Summary   删除角色
-// @Security  ApiKeyAuth
 // @Produce   application/json
 // @Param     data  body      dto.Empty    true  "空"
+// @Security  ApiKeyAuth
 // @Success   200   {object}  middleware.Response{msg=string}  "删除角色"
 // @Router    /api/authority/:authID/delAuthority [delete]
 func (a *authorityController) DeleteAuthority(ctx *gin.Context) {
