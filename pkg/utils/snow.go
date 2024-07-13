@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"hash/crc32"
+	"io/ioutil"
 	"strconv"
 	"time"
 )
@@ -13,12 +15,14 @@ var (
 
 func init() {
 	lastTimeStamp = time.Now().UnixNano() / 1e6
-	// TODO 机器码硬编码
-	SetMachineID(111)
+	SetMachineID()
 }
 
-func SetMachineID(mid int64) {
-	machineID = mid << 12
+// SetMachineID 通过productuuid 生成 机器ID
+func SetMachineID() {
+	productUUIDBytes, _ := ioutil.ReadFile("/sys/class/dmi/id/product_uuid")
+    crc32 := crc32.Checksum(productUUIDBytes, crc32.MakeTable(crc32.Castagnoli))
+	machineID = int64(crc32)<< 12
 }
 
 func GetSnowflakeID() string {
