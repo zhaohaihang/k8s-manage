@@ -27,13 +27,13 @@ func (p *CMDBHostCreateInput) BindingValidParams(ctx *gin.Context) error {
 	return pkg.DefaultGetValidParams(ctx, p)
 }
 
-type HostGroupCreateOrUpdate struct {
+type HostGroupCreateOrUpdateInput struct {
 	InstanceID string `json:"instanceID" form:"instanceID"  validate:"required"`
 	GroupName  string `json:"groupName" form:"groupName" validate:"required"`
 	Sort       uint   `json:"sort" form:"sort" validate:"required,min=1"`
 }
 
-func (p *HostGroupCreateOrUpdate) BindingValidParams(ctx *gin.Context) error {
+func (p *HostGroupCreateOrUpdateInput) BindingValidParams(ctx *gin.Context) error {
 	return pkg.DefaultGetValidParams(ctx, p)
 }
 

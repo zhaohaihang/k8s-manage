@@ -67,7 +67,7 @@
                 "summary": "创建角色",
                 "parameters": [
                     {
-                        "description": "空",
+                        "description": "角色信息",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -114,7 +114,7 @@
                 "summary": "获取角色",
                 "parameters": [
                     {
-                        "description": "空",
+                        "description": "分页信息",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -217,7 +217,7 @@
                 "summary": "更新角色",
                 "parameters": [
                     {
-                        "description": "空",
+                        "description": "角色信息",
                         "name": "data",
                         "in": "body",
                         "required": true,
@@ -279,6 +279,293 @@
                 "responses": {
                     "200": {
                         "description": "通过角色更新接口权限",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/:instanceID/deleteHostGroup": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "删除主机组",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HostGroup"
+                ],
+                "summary": "删除主机组",
+                "operationId": "/api/cmdb/:instanceID/deleteHostGroup",
+                "parameters": [
+                    {
+                        "description": "空",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.Empty"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/createHostGroup": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建主机组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HostGroup"
+                ],
+                "summary": "创建主机组",
+                "operationId": "/api/cmdb/createHostGroup",
+                "parameters": [
+                    {
+                        "description": "主机组信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.HostGroupCreateOrUpdateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/createSubHostGroup": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建子主机组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HostGroup"
+                ],
+                "summary": "创建子主机组",
+                "operationId": "/api/cmdb/createSubHostGroup",
+                "parameters": [
+                    {
+                        "description": "子主机组信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.HostGroupCreateOrUpdateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建子主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/getHostGroupList": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取主机组列表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HostGroup"
+                ],
+                "summary": "获取主机组列表",
+                "operationId": "/api/cmdb/getHostGroupList",
+                "responses": {
+                    "200": {
+                        "description": "获取主机组列表",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.CMDBHostGroup"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/getHostGroupTree": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取主机组树",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HostGroup"
+                ],
+                "summary": "获取主机组树",
+                "operationId": "/api/cmdb/getHostGroupTree",
+                "responses": {
+                    "200": {
+                        "description": "获取主机组树",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.CMDBHostGroup"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/updateHostGroup": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "更新主机组",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "HostGroup"
+                ],
+                "summary": "更新主机组",
+                "operationId": "/api/cmdb/updateHostGroup",
+                "parameters": [
+                    {
+                        "description": "主机组信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.HostGroupCreateOrUpdateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新主机组",
                         "schema": {
                             "allOf": [
                                 {
@@ -3766,6 +4053,26 @@
         "dto.Empty": {
             "type": "object"
         },
+        "dto.HostGroupCreateOrUpdateInput": {
+            "type": "object",
+            "required": [
+                "groupName",
+                "instanceID",
+                "sort"
+            ],
+            "properties": {
+                "groupName": {
+                    "type": "string"
+                },
+                "instanceID": {
+                    "type": "string"
+                },
+                "sort": {
+                    "type": "integer",
+                    "minimum": 1
+                }
+            }
+        },
         "dto.IdsReq": {
             "type": "object",
             "properties": {
@@ -4092,6 +4399,108 @@
                     "type": "string"
                 },
                 "real_err": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.CMDBHost": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "cmdbHostGroupID": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "hostPassword": {
+                    "type": "string"
+                },
+                "hostUserName": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "instanceID": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissionID": {
+                    "type": "integer"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "privateKey": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "integer"
+                },
+                "secretID": {
+                    "type": "integer"
+                },
+                "secretType": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "useSecret": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.CMDBHostGroup": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.CMDBHostGroup"
+                    }
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "groupName": {
+                    "type": "string"
+                },
+                "hostNum": {
+                    "type": "integer"
+                },
+                "hosts": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.CMDBHost"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "instanceID": {
+                    "type": "string"
+                },
+                "parentId": {
+                    "description": "上层主机组",
+                    "type": "string"
+                },
+                "sort": {
+                    "description": "排序",
+                    "type": "integer"
+                },
+                "updated_at": {
                     "type": "string"
                 }
             }

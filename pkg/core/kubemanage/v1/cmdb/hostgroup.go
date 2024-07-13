@@ -19,9 +19,9 @@ type HostGroupService interface {
 	GetHostGroupTree(ctx context.Context) ([]model.CMDBHostGroup, error)
 	GetHostGroupList(ctx context.Context) ([]model.CMDBHostGroup, error)
 	DeleteHostGroup(ctx context.Context, instanceID string) error
-	CreateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdate) error
-	CreateSonHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdate) error
-	UpdateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdate) error
+	CreateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdateInput) error
+	CreateSubHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdateInput) error
+	UpdateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdateInput) error
 }
 
 func NewHostGroupService(factory dao.ShareDaoFactory) HostGroupService {
@@ -69,7 +69,7 @@ func (h *hostGroupService) FindHostGroupByInsID(ctx context.Context, instanceID 
 }
 
 // CreateHostGroup 创建同级别主机组
-func (h *hostGroupService) CreateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdate) error {
+func (h *hostGroupService) CreateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdateInput) error {
 	g, err := h.FindHostGroupByInsID(ctx, in.InstanceID)
 	if err != nil {
 		return err
@@ -82,8 +82,8 @@ func (h *hostGroupService) CreateHostGroup(ctx context.Context, in *dto.HostGrou
 	})
 }
 
-// CreateSonHostGroup 创建子主机组
-func (h *hostGroupService) CreateSonHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdate) error {
+// CreateSubHostGroup 创建子主机组
+func (h *hostGroupService) CreateSubHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdateInput) error {
 	g, err := h.FindHostGroupByInsID(ctx, in.InstanceID)
 	if err != nil {
 		return err
@@ -96,7 +96,8 @@ func (h *hostGroupService) CreateSonHostGroup(ctx context.Context, in *dto.HostG
 	})
 }
 
-func (h *hostGroupService) UpdateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdate) error {
+// UpdateHostGroup 更新主机组
+func (h *hostGroupService) UpdateHostGroup(ctx context.Context, in *dto.HostGroupCreateOrUpdateInput) error {
 	return h.factory.CMDB().HostGroup().Updates(ctx, func(db *gorm.DB) *gorm.DB {
 		return db.Where("instanceID = ?", in.InstanceID)
 	}, &model.CMDBHostGroup{
@@ -120,6 +121,7 @@ func (h *hostGroupService) GetHostGroupTree(ctx context.Context) ([]model.CMDBHo
 	return hostGroups, nil
 }
 
+// GetHostGroupList 获取主机组列表
 func (h *hostGroupService) GetHostGroupList(ctx context.Context) ([]model.CMDBHostGroup, error) {
 	return h.factory.CMDB().HostGroup().FindList(ctx, model.CMDBHostGroup{})
 }

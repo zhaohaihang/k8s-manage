@@ -44,9 +44,9 @@ var (
 		},
 		{
 			UUID:        uuid.NewV4(),
-			UserName:    "chenteng",
+			UserName:    "zhaohaihang",
 			Password:    "$2a$14$yLCxKYP46M2NRnXujYe3mOfNe00GtBtjpaLM2eIzYCzYKQXqzsuka",
-			NickName:    "chenteng",
+			NickName:    "zhaohaihang",
 			SideMode:    "dark",
 			Avatar:      "https://qmplusimg.henrongyi.top/gva_header.jpg",
 			BaseColor:   "#fff",
@@ -59,9 +59,9 @@ var (
 		},
 		{
 			UUID:        uuid.NewV4(),
-			UserName:    "chentengsub",
+			UserName:    "zhaohaihangsub",
 			Password:    "$2a$14$MPINiht5QO2wlR3DynizXOtuqcNAOrNZdrSUKXrbjqcKbK.jcfyAW",
-			NickName:    "chentengsub",
+			NickName:    "zhaohaihangsub",
 			SideMode:    "dark",
 			Avatar:      "https://qmplusimg.henrongyi.top/gva_header.jpg",
 			BaseColor:   "#fff",
