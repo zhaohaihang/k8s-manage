@@ -7,6 +7,7 @@ type Config struct {
 	Mysql   MysqlOptions   `mapstructure:"mysql"`
 	CMDB    CMDBOptions    `mapstructure:"cmdb"`
 	Log     LogConfig      `mapstructure:"log"`
+	Crypto  CryptoConfig   `mapstructure:"crypto"`
 }
 
 type DefaultOptions struct {
@@ -45,4 +46,9 @@ type LogConfig struct {
 	MaxSize    int    `mapstructure:"max_size"`
 	MaxAge     int    `mapstructure:"max_age"`
 	MaxBackups int    `mapstructure:"max_backups"`
+}
+
+type CryptoConfig struct {
+	AESKEY string  `mapstructure:"aes_key"`
+	AESIV  string `mapstructure:"aes_iv"`
 }

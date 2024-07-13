@@ -5,17 +5,13 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
-)
 
-// TODO: key后期改成从配置文件中读取
-var (
-	AES_KEY = "KHGSI69YBWGS0TWX"
-	AES_IV  = "3010201735544643"
+	"github.com/zhaohaihang/k8s-manage/cmd/app/config"
 )
 
 func Encrypt(data []byte) (string, error) {
 	//生成 cipher.Block 数据块
-	block, err := aes.NewCipher([]byte(AES_KEY))
+	block, err := aes.NewCipher([]byte(config.SysConfig.Crypto.AESKEY))
 	if err != nil {
 		return "", err
 	}
@@ -23,7 +19,7 @@ func Encrypt(data []byte) (string, error) {
 	blockSize := block.BlockSize()
 	originData := pad(data, blockSize)
 	//加密方式
-	blockMode := cipher.NewCBCEncrypter(block, []byte(AES_IV))
+	blockMode := cipher.NewCBCEncrypter(block, []byte(config.SysConfig.Crypto.AESIV))
 	//加密，输出到[]byte数组
 	crypted := make([]byte, len(originData))
 	blockMode.CryptBlocks(crypted, originData)
@@ -36,12 +32,12 @@ func Decrypt(decryptText string) ([]byte, error) {
 		return nil, err
 	}
 	//生成密码数据块cipher.Block
-	block, err := aes.NewCipher([]byte(AES_KEY))
+	block, err := aes.NewCipher([]byte(config.SysConfig.Crypto.AESKEY))
 	if err != nil {
 		return nil, err
 	}
 	//解密模式
-	blockMode := cipher.NewCBCDecrypter(block, []byte(AES_IV))
+	blockMode := cipher.NewCBCDecrypter(block, []byte(config.SysConfig.Crypto.AESIV))
 	//输出到[]byte数组
 	originData := make([]byte, len(decodeData))
 	blockMode.CryptBlocks(originData, decodeData)

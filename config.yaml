@@ -26,3 +26,7 @@ log:
   max_size: 200    # 日志文件最大大小(MB)
   max_age: 30      # 保留旧日志文件的最大天数
   max_backups: 7   # 最大保留日志个数
+
+crypto:
+  aes_key: "KHGSI69YBWGS0TWX"
+	aes_iv: "3010201735544643"
