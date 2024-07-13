@@ -12,6 +12,16 @@ import (
 	"github.com/zhaohaihang/k8s-manage/pkg/globalError"
 )
 
+// @Description  创建主机
+// @ID           /api/cmdb/createHost
+// @Tags         Host
+// @Summary   创建主机
+// @Accept    application/json
+// @Produce   application/json
+// @Param     data  body      dto.CMDBHostCreateInput 	true 	"主机信息"
+// @Security  ApiKeyAuth
+// @Success   200   {object}  middleware.Response{msg=string}  "创建主机"
+// @Router    /api/cmdb/createHost [post]
 func (c *cmdbController) CreateHost(ctx *gin.Context) {
 	params := &dto.CMDBHostCreateInput{}
 	if err := params.BindingValidParams(ctx); err != nil {
@@ -27,6 +37,16 @@ func (c *cmdbController) CreateHost(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, "")
 }
 
+// @Description  更新主机
+// @ID           /api/cmdb/updateHost
+// @Tags         Host
+// @Summary   更新主机
+// @Accept    application/json
+// @Produce   application/json
+// @Param     data  body      dto.CMDBHostCreateInput 	true 	"主机信息"
+// @Security  ApiKeyAuth
+// @Success   200   {object}  middleware.Response{msg=string}  "更新主机"
+// @Router    /api/cmdb/updateHost [put]
 func (c *cmdbController) UpdateHost(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)
 	if err != nil {
@@ -48,6 +68,14 @@ func (c *cmdbController) UpdateHost(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, "")
 }
 
+// @Description  主机分页
+// @ID       /api/cmdb/:groupID/pageHost
+// @Tags      Host
+// @Summary   获取主机分页
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Success   200   {object}  middleware.Response{data=dto.PageCMDBHostOut,msg=string}  "获取主机分页"
+// @Router    /api/cmdb/:groupID/pageHost [get]
 func (c *cmdbController) PageHost(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)
 	if err != nil {
@@ -76,6 +104,15 @@ func (c *cmdbController) PageHost(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, data)
 }
 
+// @Description  删除主机
+// @ID           /api/cmdb/:instanceID/deleteHost
+// @Tags         Host
+// @Summary   删除主机
+// @Produce   application/json
+// @Param     data  body       dto.Empty    true  "空"
+// @Security  ApiKeyAuth
+// @Success   200   {object}  middleware.Response{msg=string}  "删除主机"
+// @Router    /api/cmdb/:instanceID/deleteHost [delete]
 func (c *cmdbController) DeleteHost(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)
 	if err != nil {
@@ -92,6 +129,15 @@ func (c *cmdbController) DeleteHost(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, "")
 }
 
+// @Description  批量删除主机
+// @ID           /api/cmdb/:instanceID/deleteHost
+// @Tags         Host
+// @Summary   批量删除主机
+// @Produce   application/json
+// @Param     data  body       dto.Empty    true  "空"
+// @Security  ApiKeyAuth
+// @Success   200   {object}  middleware.Response{msg=string}  "删除主机"
+// @Router    /api/cmdb/:instanceID/deleteHost [delete]
 func (c *cmdbController) DeleteHosts(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)
 	if err != nil {
@@ -113,6 +159,14 @@ func (c *cmdbController) DeleteHosts(ctx *gin.Context) {
 	middleware.ResponseSuccess(ctx, "")
 }
 
+// @Description  获取主机列表
+// @ID       /api/cmdb/getHostsList
+// @Tags      Host
+// @Summary   获取主机列表
+// @Security  ApiKeyAuth
+// @Produce   application/json
+// @Success   200   {object}  middleware.Response{data=model.CMDBHost,msg=string}  "获取主机列表"
+// @Router    /api/cmdb/getHostsList [get]
 func (c *cmdbController) GetHostList(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)
 	if err != nil {

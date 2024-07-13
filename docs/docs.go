@@ -327,6 +327,96 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/cmdb/:groupID/pageHost": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "主机分页",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Host"
+                ],
+                "summary": "获取主机分页",
+                "operationId": "/api/cmdb/:groupID/pageHost",
+                "responses": {
+                    "200": {
+                        "description": "获取主机分页",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.PageCMDBHostOut"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/:instanceID/deleteHost": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "批量删除主机",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Host"
+                ],
+                "summary": "批量删除主机",
+                "operationId": "/api/cmdb/:instanceID/deleteHost",
+                "parameters": [
+                    {
+                        "description": "空",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.Empty"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除主机",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/api/cmdb/:instanceID/deleteHostGroup": {
             "delete": {
                 "security": [
@@ -357,6 +447,58 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "更新主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/createHost": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建主机",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Host"
+                ],
+                "summary": "创建主机",
+                "operationId": "/api/cmdb/createHost",
+                "parameters": [
+                    {
+                        "description": "主机信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CMDBHostCreateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建主机",
                         "schema": {
                             "allOf": [
                                 {
@@ -551,6 +693,99 @@ const docTemplate = `{
                                         "data": {
                                             "$ref": "#/definitions/model.CMDBHostGroup"
                                         },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/getHostsList": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "获取主机列表",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Host"
+                ],
+                "summary": "获取主机列表",
+                "operationId": "/api/cmdb/getHostsList",
+                "responses": {
+                    "200": {
+                        "description": "获取主机列表",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/model.CMDBHost"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/updateHost": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "更新主机",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Host"
+                ],
+                "summary": "更新主机",
+                "operationId": "/api/cmdb/updateHost",
+                "parameters": [
+                    {
+                        "description": "主机信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CMDBHostCreateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新主机",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
                                         "msg": {
                                             "type": "string"
                                         }
@@ -4042,6 +4277,54 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.CMDBHostCreateInput": {
+            "type": "object",
+            "required": [
+                "address",
+                "cmdbHostGroupID",
+                "name",
+                "port",
+                "useSecret"
+            ],
+            "properties": {
+                "address": {
+                    "type": "string"
+                },
+                "cmdbHostGroupID": {
+                    "type": "integer"
+                },
+                "hostPassword": {
+                    "type": "string"
+                },
+                "hostUserName": {
+                    "type": "string"
+                },
+                "instanceID": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "integer"
+                },
+                "privateKey": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "integer"
+                },
+                "secretID": {
+                    "type": "integer"
+                },
+                "secretType": {
+                    "type": "integer"
+                },
+                "useSecret": {
+                    "type": "integer"
+                }
+            }
+        },
         "dto.CasbinInReceive": {
             "type": "object",
             "properties": {
@@ -4133,6 +4416,20 @@ const docTemplate = `{
                 "pageSize": {
                     "description": "每页大小",
                     "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.PageCMDBHostOut": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.CMDBHost"
+                    }
                 },
                 "total": {
                     "type": "integer"

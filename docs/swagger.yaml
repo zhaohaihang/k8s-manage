@@ -54,6 +54,39 @@ definitions:
       total:
         type: integer
     type: object
+  dto.CMDBHostCreateInput:
+    properties:
+      address:
+        type: string
+      cmdbHostGroupID:
+        type: integer
+      hostPassword:
+        type: string
+      hostUserName:
+        type: string
+      instanceID:
+        type: string
+      name:
+        type: string
+      port:
+        type: integer
+      privateKey:
+        type: string
+      protocol:
+        type: integer
+      secretID:
+        type: integer
+      secretType:
+        type: integer
+      useSecret:
+        type: integer
+    required:
+    - address
+    - cmdbHostGroupID
+    - name
+    - port
+    - useSecret
+    type: object
   dto.CasbinInReceive:
     properties:
       authorityId:
@@ -117,6 +150,15 @@ definitions:
       pageSize:
         description: 每页大小
         type: integer
+      total:
+        type: integer
+    type: object
+  dto.PageCMDBHostOut:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/model.CMDBHost'
+        type: array
       total:
         type: integer
     type: object
@@ -779,6 +821,57 @@ paths:
       summary: 通过角色更新接口权限
       tags:
       - Authority
+  /api/cmdb/:groupID/pageHost:
+    get:
+      description: 主机分页
+      operationId: /api/cmdb/:groupID/pageHost
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取主机分页
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.PageCMDBHostOut'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取主机分页
+      tags:
+      - Host
+  /api/cmdb/:instanceID/deleteHost:
+    delete:
+      description: 批量删除主机
+      operationId: /api/cmdb/:instanceID/deleteHost
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除主机
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除主机
+      tags:
+      - Host
   /api/cmdb/:instanceID/deleteHostGroup:
     delete:
       description: 删除主机组
@@ -807,6 +900,36 @@ paths:
       summary: 删除主机组
       tags:
       - HostGroup
+  /api/cmdb/createHost:
+    post:
+      consumes:
+      - application/json
+      description: 创建主机
+      operationId: /api/cmdb/createHost
+      parameters:
+      - description: 主机信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CMDBHostCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建主机
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 创建主机
+      tags:
+      - Host
   /api/cmdb/createHostGroup:
     post:
       consumes:
@@ -913,6 +1036,59 @@ paths:
       summary: 获取主机组树
       tags:
       - HostGroup
+  /api/cmdb/getHostsList:
+    get:
+      description: 获取主机列表
+      operationId: /api/cmdb/getHostsList
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 获取主机列表
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.CMDBHost'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 获取主机列表
+      tags:
+      - Host
+  /api/cmdb/updateHost:
+    put:
+      consumes:
+      - application/json
+      description: 更新主机
+      operationId: /api/cmdb/updateHost
+      parameters:
+      - description: 主机信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CMDBHostCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新主机
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新主机
+      tags:
+      - Host
   /api/cmdb/updateHostGroup:
     put:
       consumes:
