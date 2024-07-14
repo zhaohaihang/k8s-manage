@@ -87,6 +87,53 @@ definitions:
     - port
     - useSecret
     type: object
+  dto.CMDBSecretCreateInput:
+    properties:
+      content:
+        type: string
+      hostPassword:
+        type: string
+      hostUserName:
+        type: string
+      name:
+        type: string
+      privateKey:
+        type: string
+      protocol:
+        type: integer
+      secretType:
+        type: integer
+    required:
+    - hostUserName
+    - name
+    - protocol
+    - secretType
+    type: object
+  dto.CMDBSecretUpdateInput:
+    properties:
+      content:
+        type: string
+      hostPassword:
+        type: string
+      hostUserName:
+        type: string
+      instanceID:
+        type: string
+      name:
+        type: string
+      privateKey:
+        type: string
+      protocol:
+        type: integer
+      secretType:
+        type: integer
+    required:
+    - hostUserName
+    - instanceID
+    - name
+    - protocol
+    - secretType
+    type: object
   dto.CasbinInReceive:
     properties:
       authorityId:
@@ -159,6 +206,21 @@ definitions:
         items:
           $ref: '#/definitions/model.CMDBHost'
         type: array
+      total:
+        type: integer
+    type: object
+  dto.PageCMDBSecretOut:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/model.CMDBSecret'
+        type: array
+      page:
+        description: 页码
+        type: integer
+      pageSize:
+        description: 每页大小
+        type: integer
       total:
         type: integer
     type: object
@@ -424,6 +486,31 @@ definitions:
         type: string
       sort:
         description: 排序
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  model.CMDBSecret:
+    properties:
+      content:
+        type: string
+      created_at:
+        type: string
+      hostPassword:
+        type: string
+      hostUserName:
+        type: string
+      id:
+        type: integer
+      instanceID:
+        type: string
+      name:
+        type: string
+      privateKey:
+        type: string
+      protocol:
+        type: integer
+      secretType:
         type: integer
       updated_at:
         type: string
@@ -900,6 +987,34 @@ paths:
       summary: 删除主机组
       tags:
       - HostGroup
+  /api/cmdb/:instanceID/deleteSecret:
+    delete:
+      description: 删除秘钥
+      operationId: /api/cmdb/:instanceID/deleteSecret
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除秘钥
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 删除秘钥
+      tags:
+      - Secret
   /api/cmdb/createHost:
     post:
       consumes:
@@ -960,6 +1075,36 @@ paths:
       summary: 创建主机组
       tags:
       - HostGroup
+  /api/cmdb/createSecret:
+    post:
+      consumes:
+      - application/json
+      description: 创建秘钥
+      operationId: /api/cmdb/createSecret
+      parameters:
+      - description: 秘钥信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CMDBSecretCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 创建秘钥
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 创建主机组
+      tags:
+      - Secret
   /api/cmdb/createSubHostGroup:
     post:
       consumes:
@@ -990,6 +1135,34 @@ paths:
       summary: 创建子主机组
       tags:
       - HostGroup
+  /api/cmdb/deleteSecrets:
+    delete:
+      description: 批量删除秘钥
+      operationId: /api/cmdb/deleteSecrets
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 批量删除秘钥
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除秘钥
+      tags:
+      - Secret
   /api/cmdb/getHostGroupList:
     get:
       description: 获取主机组列表
@@ -1038,27 +1211,52 @@ paths:
       - HostGroup
   /api/cmdb/getHostsList:
     get:
-      description: 获取主机列表
+      description: 获取秘钥列表
       operationId: /api/cmdb/getHostsList
       produces:
       - application/json
       responses:
         "200":
-          description: 获取主机列表
+          description: 获取秘钥列表
           schema:
             allOf:
             - $ref: '#/definitions/middleware.Response'
             - properties:
                 data:
-                  $ref: '#/definitions/model.CMDBHost'
+                  items:
+                    $ref: '#/definitions/model.CMDBSecret'
+                  type: array
                 msg:
                   type: string
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 获取主机列表
+      summary: 获取秘钥列表
       tags:
-      - Host
+      - Secret
+  /api/cmdb/pageSecret:
+    get:
+      description: 秘钥分页
+      operationId: /api/cmdb/pageSecret
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 秘钥分页
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.PageCMDBSecretOut'
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 秘钥分页
+      tags:
+      - Secret
   /api/cmdb/updateHost:
     put:
       consumes:
@@ -1119,6 +1317,36 @@ paths:
       summary: 更新主机组
       tags:
       - HostGroup
+  /api/cmdb/updateSecret:
+    put:
+      consumes:
+      - application/json
+      description: 更新秘钥
+      operationId: /api/cmdb/updateSecret
+      parameters:
+      - description: 秘钥信息
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CMDBSecretUpdateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 更新秘钥
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 更新秘钥
+      tags:
+      - Secret
   /api/k8s/Secret/del:
     delete:
       consumes:

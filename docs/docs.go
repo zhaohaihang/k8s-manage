@@ -466,6 +466,55 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/cmdb/:instanceID/deleteSecret": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "删除秘钥",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret"
+                ],
+                "summary": "删除秘钥",
+                "operationId": "/api/cmdb/:instanceID/deleteSecret",
+                "parameters": [
+                    {
+                        "description": "空",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.Empty"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除秘钥",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/api/cmdb/createHost": {
             "post": {
                 "security": [
@@ -570,6 +619,58 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/cmdb/createSecret": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "创建秘钥",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret"
+                ],
+                "summary": "创建主机组",
+                "operationId": "/api/cmdb/createSecret",
+                "parameters": [
+                    {
+                        "description": "秘钥信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CMDBSecretCreateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "创建秘钥",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/api/cmdb/createSubHostGroup": {
             "post": {
                 "security": [
@@ -603,6 +704,55 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "创建子主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/deleteSecrets": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "批量删除秘钥",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret"
+                ],
+                "summary": "批量删除秘钥",
+                "operationId": "/api/cmdb/deleteSecrets",
+                "parameters": [
+                    {
+                        "description": "空",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.Empty"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "批量删除秘钥",
                         "schema": {
                             "allOf": [
                                 {
@@ -711,18 +861,18 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "获取主机列表",
+                "description": "获取秘钥列表",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Host"
+                    "Secret"
                 ],
-                "summary": "获取主机列表",
+                "summary": "获取秘钥列表",
                 "operationId": "/api/cmdb/getHostsList",
                 "responses": {
                     "200": {
-                        "description": "获取主机列表",
+                        "description": "获取秘钥列表",
                         "schema": {
                             "allOf": [
                                 {
@@ -732,7 +882,51 @@ const docTemplate = `{
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/model.CMDBHost"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.CMDBSecret"
+                                            }
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/pageSecret": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "秘钥分页",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret"
+                ],
+                "summary": "秘钥分页",
+                "operationId": "/api/cmdb/pageSecret",
+                "responses": {
+                    "200": {
+                        "description": "秘钥分页",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.PageCMDBSecretOut"
                                         },
                                         "msg": {
                                             "type": "string"
@@ -830,6 +1024,58 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "更新主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/updateSecret": {
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "更新秘钥",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Secret"
+                ],
+                "summary": "更新秘钥",
+                "operationId": "/api/cmdb/updateSecret",
+                "parameters": [
+                    {
+                        "description": "秘钥信息",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.CMDBSecretUpdateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "更新秘钥",
                         "schema": {
                             "allOf": [
                                 {
@@ -4325,6 +4571,74 @@ const docTemplate = `{
                 }
             }
         },
+        "dto.CMDBSecretCreateInput": {
+            "type": "object",
+            "required": [
+                "hostUserName",
+                "name",
+                "protocol",
+                "secretType"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "hostPassword": {
+                    "type": "string"
+                },
+                "hostUserName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "privateKey": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "integer"
+                },
+                "secretType": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.CMDBSecretUpdateInput": {
+            "type": "object",
+            "required": [
+                "hostUserName",
+                "instanceID",
+                "name",
+                "protocol",
+                "secretType"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "hostPassword": {
+                    "type": "string"
+                },
+                "hostUserName": {
+                    "type": "string"
+                },
+                "instanceID": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "privateKey": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "integer"
+                },
+                "secretType": {
+                    "type": "integer"
+                }
+            }
+        },
         "dto.CasbinInReceive": {
             "type": "object",
             "properties": {
@@ -4430,6 +4744,28 @@ const docTemplate = `{
                     "items": {
                         "$ref": "#/definitions/model.CMDBHost"
                     }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.PageCMDBSecretOut": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.CMDBSecret"
+                    }
+                },
+                "page": {
+                    "description": "页码",
+                    "type": "integer"
+                },
+                "pageSize": {
+                    "description": "每页大小",
+                    "type": "integer"
                 },
                 "total": {
                     "type": "integer"
@@ -4824,6 +5160,44 @@ const docTemplate = `{
                 },
                 "sort": {
                     "description": "排序",
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.CMDBSecret": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "hostPassword": {
+                    "type": "string"
+                },
+                "hostUserName": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "instanceID": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "privateKey": {
+                    "type": "string"
+                },
+                "protocol": {
+                    "type": "integer"
+                },
+                "secretType": {
                     "type": "integer"
                 },
                 "updated_at": {
