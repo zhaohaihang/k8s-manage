@@ -375,14 +375,14 @@ const docTemplate = `{
                         "ApiKeyAuth": []
                     }
                 ],
-                "description": "批量删除主机",
+                "description": "删除主机",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "Host"
                 ],
-                "summary": "批量删除主机",
+                "summary": "删除主机",
                 "operationId": "/api/cmdb/:instanceID/deleteHost",
                 "parameters": [
                     {
@@ -704,6 +704,55 @@ const docTemplate = `{
                 "responses": {
                     "200": {
                         "description": "创建子主机组",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "msg": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cmdb/deleteHosts": {
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "批量删除主机",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Host"
+                ],
+                "summary": "批量删除主机",
+                "operationId": "/api/cmdb/deleteHosts",
+                "parameters": [
+                    {
+                        "description": "空",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.Empty"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "删除主机",
                         "schema": {
                             "allOf": [
                                 {

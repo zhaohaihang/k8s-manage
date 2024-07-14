@@ -130,14 +130,14 @@ func (c *cmdbController) DeleteHost(ctx *gin.Context) {
 }
 
 // @Description  批量删除主机
-// @ID           /api/cmdb/:instanceID/deleteHost
+// @ID           /api/cmdb/deleteHosts
 // @Tags         Host
 // @Summary   批量删除主机
 // @Produce   application/json
 // @Param     data  body       dto.Empty    true  "空"
 // @Security  ApiKeyAuth
 // @Success   200   {object}  middleware.Response{msg=string}  "删除主机"
-// @Router    /api/cmdb/:instanceID/deleteHost [delete]
+// @Router    /api/cmdb/deleteHosts [delete]
 func (c *cmdbController) DeleteHosts(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)
 	if err != nil {
@@ -165,7 +165,7 @@ func (c *cmdbController) DeleteHosts(ctx *gin.Context) {
 // @Summary   获取主机列表
 // @Security  ApiKeyAuth
 // @Produce   application/json
-// @Success   200   {object}  middleware.Response{data=model.CMDBHost,msg=string}  "获取主机列表"
+// @Success   200   {object}  middleware.Response{data=[]model.CMDBHost,msg=string}  "获取主机列表"
 // @Router    /api/cmdb/getHostsList [get]
 func (c *cmdbController) GetHostList(ctx *gin.Context) {
 	userUUID, err := utils.GetUserUUID(ctx)

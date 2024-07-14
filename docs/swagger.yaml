@@ -933,7 +933,7 @@ paths:
       - Host
   /api/cmdb/:instanceID/deleteHost:
     delete:
-      description: 批量删除主机
+      description: 删除主机
       operationId: /api/cmdb/:instanceID/deleteHost
       parameters:
       - description: 空
@@ -956,7 +956,7 @@ paths:
               type: object
       security:
       - ApiKeyAuth: []
-      summary: 批量删除主机
+      summary: 删除主机
       tags:
       - Host
   /api/cmdb/:instanceID/deleteHostGroup:
@@ -1135,6 +1135,34 @@ paths:
       summary: 创建子主机组
       tags:
       - HostGroup
+  /api/cmdb/deleteHosts:
+    delete:
+      description: 批量删除主机
+      operationId: /api/cmdb/deleteHosts
+      parameters:
+      - description: 空
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.Empty'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 删除主机
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                msg:
+                  type: string
+              type: object
+      security:
+      - ApiKeyAuth: []
+      summary: 批量删除主机
+      tags:
+      - Host
   /api/cmdb/deleteSecrets:
     delete:
       description: 批量删除秘钥
